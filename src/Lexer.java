@@ -10,6 +10,14 @@ public class Lexer {
         this.currentChar = this.text.charAt(this.index);
     }
 
+    public int getIndex() {
+        return this.index;
+    }
+
+    public Character getCurrentChar() {
+        return this.currentChar;
+    }
+
     void error() throws InvalidCharacterException {
         throw new InvalidCharacterException("Invalid character");
     }
@@ -17,6 +25,7 @@ public class Lexer {
     void advance() {
         this.index += 1;
         if (this.index > this.text.length() - 1) {
+            this.currentChar = null; // Indicates end of input
             return;
         }
         this.currentChar = this.text.charAt(this.index);
@@ -30,15 +39,16 @@ public class Lexer {
 
     String atom() {
         String result = "";
-        while (Character.isAlphabetic(this.currentChar)) {
+        while (this.currentChar != null && Character.isAlphabetic(this.currentChar)) {
             result = result.concat(this.currentChar.toString());
+            this.advance();
         }
         return result;
     }
 
     Token getNextToken() throws InvalidCharacterException {
-        while (this.index < this.text.length()) {
-            System.out.println(Character.getName(this.currentChar));
+        while (this.currentChar != null) {
+            //System.out.println(Character.getName(this.currentChar));
 
             this.skipWhitespace(); // Loops zero or more times
 
@@ -47,15 +57,18 @@ public class Lexer {
             }
 
             if (this.currentChar.equals('¬')) {
-                return new Token(TokenType.NOT, this.currentChar.toString());
+                this.advance();
+                return new Token(TokenType.NOT, "¬");
             }
 
             if (this.currentChar.equals('∧')) {
-                return new Token(TokenType.AND, this.currentChar.toString());
+                this.advance();
+                return new Token(TokenType.AND, "∧");
             }
 
             if (this.currentChar.equals('∨')) {
-                return new Token(TokenType.OR, this.currentChar.toString());
+                this.advance();
+                return new Token(TokenType.OR, "∨");
             }
 
 //            if (this.currentChar.equals('⇒') || this.currentChar.equals('→')) {
@@ -64,6 +77,6 @@ public class Lexer {
 
             this.error();
         }
-        return new Token(TokenType.NAN, "");
+        return new Token(TokenType.EOF, null);
     }
 }

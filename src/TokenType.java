@@ -1,5 +1,5 @@
 public enum TokenType {
-    NAN,
+    EOF,
     ATOM,
     NOT,
     AND,

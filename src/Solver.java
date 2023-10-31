@@ -24,7 +24,6 @@ public class Solver {
             Lexer lexer = new Lexer(text);
             Parser parser = new Parser(lexer);
             parser.parse();
-            //out.println("Need to determine the validity of " + text);
         }
     }
 
