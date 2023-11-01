@@ -4,5 +4,7 @@ public enum TokenType {
     NOT,
     AND,
     OR,
-    //IF
+    //IF,
+    LPAREN,
+    RPAREN
 }

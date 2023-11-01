@@ -5,4 +5,8 @@ public class Atom implements AST {
     Atom(Token token) {
         this.token = token;
     }
+
+    public String toString() {
+        return String.format("%s", this.token.value);
+    }
 }

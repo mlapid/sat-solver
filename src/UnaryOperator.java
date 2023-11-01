@@ -6,4 +6,8 @@ public class UnaryOperator implements AST {
         this.token = token;
         this.formula = formula;
     }
+
+    public String toString() {
+        return String.format("%s%s", this.token.value, this.formula);
+    }
 }

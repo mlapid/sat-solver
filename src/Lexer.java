@@ -75,6 +75,16 @@ public class Lexer {
 //                return new Token(TokenType.IF, this.currentChar.toString());
 //            }
 
+            if (this.currentChar.equals('(')) {
+                this.advance();
+                return new Token(TokenType.LPAREN, "(");
+            }
+
+            if (this.currentChar.equals(')')) {
+                this.advance();
+                return new Token(TokenType.RPAREN, ")");
+            }
+
             this.error();
         }
         return new Token(TokenType.EOF, null);

@@ -23,15 +23,21 @@ public class Parser {
     AST literal() throws InvalidCharacterException, InvalidSyntaxException {
         /*literal : (¬) literal | ATOM | LPAREN formula RPAREN*/
 
+        Token token = this.currentToken;
         AST node;
 
-        if (this.currentToken.type.equals(TokenType.NOT)) {
+        if (token.type.equals(TokenType.NOT)) {
             this.eat(TokenType.NOT);
-            node = new UnaryOperator(this.currentToken, this.literal());
+            node = new UnaryOperator(token, this.literal());
+        } else if (token.type.equals(TokenType.LPAREN)) {
+            this.eat(TokenType.LPAREN);
+            node = this.formula();
+            this.eat(TokenType.RPAREN);
         } else {
             this.eat(TokenType.ATOM);
-            node = new Atom(this.currentToken);
+            node = new Atom(token);
         }
+        System.out.println("Literal returning " + node.toString());
         return node;
     }
 
@@ -41,9 +47,11 @@ public class Parser {
         AST node = this.literal();
 
         while (this.currentToken.type.equals(TokenType.AND)) {
+            Token token = this.currentToken;
             this.eat(TokenType.AND);
-            node = new BinaryOperator(node, this.currentToken, this.literal());
+            node = new BinaryOperator(node, token, this.literal());
         }
+        System.out.println("Clause returning " + node.toString());
         return node;
     }
 
@@ -57,9 +65,11 @@ public class Parser {
         AST node = this.clause();
 
         while (this.currentToken.type.equals(TokenType.OR)) {
+            Token token = this.currentToken;
             this.eat(TokenType.OR);
-            node = new BinaryOperator(node, this.currentToken, this.clause());
+            node = new BinaryOperator(node, token, this.clause());
         }
+        System.out.println("Formula returning " + node.toString());
         return node;
     }
 

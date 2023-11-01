@@ -23,7 +23,8 @@ public class Solver {
 
             Lexer lexer = new Lexer(text);
             Parser parser = new Parser(lexer);
-            parser.parse();
+            AST ast = parser.parse();
+            out.println("Parser returning " + ast.toString());
         }
     }
 

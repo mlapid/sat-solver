@@ -9,4 +9,8 @@ public class BinaryOperator implements AST {
         this.token = token;
         this.right = right;
     }
+
+    public String toString() {
+        return String.format("%s %s %s", this.left, this.token.value, this.right);
+    }
 }
