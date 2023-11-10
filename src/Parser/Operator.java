@@ -1,4 +1,6 @@
-public class Operator implements AST {
+package Parser;
+
+public class Operator extends AST {
 
     int precedenceLevel;
 

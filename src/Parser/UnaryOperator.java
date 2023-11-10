@@ -1,4 +1,8 @@
-public class UnaryOperator implements AST {
+package Parser;
+
+import Lexer.Token;
+
+public class UnaryOperator extends AST {
 
     Token token;
     AST formula;

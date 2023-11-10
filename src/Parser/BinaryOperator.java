@@ -1,4 +1,8 @@
-public class BinaryOperator implements AST {
+package Parser;
+
+import Lexer.Token;
+
+public class BinaryOperator extends AST {
 
     AST left;
     Token token;

@@ -1,4 +1,8 @@
-public class Atom implements AST {
+package Parser;
+
+import Lexer.Token;
+
+public class Atom extends AST {
 
     Token token;
 

@@ -1,3 +1,9 @@
+import Lexer.Lexer;
+import Lexer.InvalidCharacterException;
+import Parser.Parser;
+import Parser.InvalidSyntaxException;
+import Parser.AST;
+
 import java.util.Scanner;
 import java.io.PrintStream;
 

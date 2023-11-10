@@ -1,10 +1,12 @@
+package Lexer;
+
 public class Lexer {
 
     String text;
     private int index;
     private Character currentChar;
 
-    Lexer(String text) {
+    public Lexer(String text) {
         this.text = text;
         this.index = 0;
         this.currentChar = this.text.charAt(this.index);
@@ -46,7 +48,7 @@ public class Lexer {
         return result;
     }
 
-    Token getNextToken() throws InvalidCharacterException {
+    public Token getNextToken() throws InvalidCharacterException {
         while (this.currentChar != null) {
             //System.out.println(Character.getName(this.currentChar));
 
@@ -72,7 +74,7 @@ public class Lexer {
             }
 
 //            if (this.currentChar.equals('⇒') || this.currentChar.equals('→')) {
-//                return new Token(TokenType.IF, this.currentChar.toString());
+//                return new Lexer.Lexer.Token(Lexer.Lexer.TokenType.IF, this.currentChar.toString());
 //            }
 
             if (this.currentChar.equals('(')) {

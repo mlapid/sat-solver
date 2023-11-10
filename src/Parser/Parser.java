@@ -1,9 +1,16 @@
+package Parser;
+
+import Lexer.Lexer;
+import Lexer.Token;
+import Lexer.TokenType;
+import Lexer.InvalidCharacterException;
+
 public class Parser {
 
     Lexer lexer;
     Token currentToken;
 
-    Parser(Lexer lexer) throws InvalidCharacterException {
+    public Parser(Lexer lexer) throws InvalidCharacterException {
         this.lexer = lexer;
         this.currentToken = lexer.getNextToken();
     }
@@ -73,7 +80,7 @@ public class Parser {
         return node;
     }
 
-    AST parse() throws InvalidCharacterException, InvalidSyntaxException {
+    public AST parse() throws InvalidCharacterException, InvalidSyntaxException {
         return this.formula();
     }
 }
