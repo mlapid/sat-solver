@@ -1,5 +1,7 @@
 package Parser;
 
+import BinaryTreeDiagram.ChildrenExceededException;
+import BinaryTreeDiagram.Node;
 import Lexer.Lexer;
 import Lexer.Token;
 import Lexer.TokenType;
@@ -9,10 +11,12 @@ public class Parser {
 
     Lexer lexer;
     Token currentToken;
+    AST ast;
 
     public Parser(Lexer lexer) throws InvalidCharacterException {
         this.lexer = lexer;
         this.currentToken = lexer.getNextToken();
+        this.ast = new AST();
     }
 
     void error() throws InvalidSyntaxException {
@@ -27,11 +31,11 @@ public class Parser {
         }
     }
 
-    AST literal() throws InvalidCharacterException, InvalidSyntaxException {
+    Node literal() throws InvalidCharacterException, InvalidSyntaxException {
         /*literal : (¬) literal | ATOM | LPAREN formula RPAREN*/
 
         Token token = this.currentToken;
-        AST node;
+        Node node;
 
         if (token.type.equals(TokenType.NOT)) {
             this.eat(TokenType.NOT);
@@ -44,43 +48,41 @@ public class Parser {
             this.eat(TokenType.ATOM);
             node = new Atom(token);
         }
-        System.out.println("Literal returning " + node.toString());
         return node;
     }
 
-    AST clause() throws InvalidCharacterException, InvalidSyntaxException {
+    Node clause() throws InvalidCharacterException, InvalidSyntaxException {
         /*clause : literal ((AND) literal)*"""*/
 
-        AST node = this.literal();
+        Node node = this.literal();
 
         while (this.currentToken.type.equals(TokenType.AND)) {
             Token token = this.currentToken;
             this.eat(TokenType.AND);
             node = new BinaryOperator(node, token, this.literal());
         }
-        System.out.println("Clause returning " + node.toString());
         return node;
     }
 
-    AST formula() throws InvalidCharacterException, InvalidSyntaxException {
+    Node formula() throws InvalidCharacterException, InvalidSyntaxException {
         /*
         formula: clause ((OR) clause)*
         clause : literal ((AND) literal)*
         literal: (¬) literal | ATOM | LPAREN formula RPAREN
          */
 
-        AST node = this.clause();
+        Node node = this.clause();
 
         while (this.currentToken.type.equals(TokenType.OR)) {
             Token token = this.currentToken;
             this.eat(TokenType.OR);
             node = new BinaryOperator(node, token, this.clause());
         }
-        System.out.println("Formula returning " + node.toString());
         return node;
     }
 
-    public AST parse() throws InvalidCharacterException, InvalidSyntaxException {
-        return this.formula();
+    public AST parse() throws InvalidCharacterException, InvalidSyntaxException, ChildrenExceededException {
+        ast.addNode(ast.root, this.formula());
+        return this.ast;
     }
 }

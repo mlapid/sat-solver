@@ -2,7 +2,7 @@ package Lexer;
 
 public class Lexer {
 
-    String text;
+    private final String text;
     private int index;
     private Character currentChar;
 
@@ -10,14 +10,6 @@ public class Lexer {
         this.text = text;
         this.index = 0;
         this.currentChar = this.text.charAt(this.index);
-    }
-
-    public int getIndex() {
-        return this.index;
-    }
-
-    public Character getCurrentChar() {
-        return this.currentChar;
     }
 
     void error() throws InvalidCharacterException {

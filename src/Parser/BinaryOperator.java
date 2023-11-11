@@ -1,14 +1,16 @@
 package Parser;
 
+import BinaryTreeDiagram.Node;
 import Lexer.Token;
 
-public class BinaryOperator extends AST {
+public class BinaryOperator extends Node {
 
-    AST left;
+    Node left;
     Token token;
-    AST right;
+    Node right;
 
-    BinaryOperator(AST left, Token token, AST right) {
+    BinaryOperator(Node left, Token token, Node right) {
+        super(token.value, left, right);
         this.left = left;
         this.token = token;
         this.right = right;

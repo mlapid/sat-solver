@@ -1,12 +1,15 @@
 package Parser;
 
+import BinaryTreeDiagram.Node;
 import Lexer.Token;
 
-public class UnaryOperator extends AST {
+public class UnaryOperator extends Node {
 
     Token token;
-    AST formula;
-    UnaryOperator(Token token, AST formula) {
+    Node formula;
+
+    UnaryOperator(Token token, Node formula) {
+        super(token.value, formula);
         this.token = token;
         this.formula = formula;
     }
