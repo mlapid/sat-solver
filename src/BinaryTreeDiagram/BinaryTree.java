@@ -9,7 +9,7 @@ public class BinaryTree {
     }
 
     // Adds leaf node, max 2 per parent
-    void addNode(Node parent, Node child) throws ChildrenExceededException {
+    public void addNode(Node parent, Node child) throws ChildrenExceededException {
         if (this.root == null) {
             this.root = child;
         } else {

@@ -10,6 +10,17 @@ public class Node {
         this.left = this.right = null;
     }
 
+    public Node(String value, Node left) {
+        this.value = value;
+        this.left = left;
+    }
+
+    public Node(String value, Node left, Node right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
+
     public String toString() {
         return String.format("BinaryTreeDiagram.Node %s with %d children",
                 this.value, this.childrenCount());

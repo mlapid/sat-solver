@@ -6,7 +6,7 @@ public class BinaryTreePrinter {
 
     BinaryTree tree;
 
-    BinaryTreePrinter(BinaryTree tree) {
+    public BinaryTreePrinter(BinaryTree tree) {
         this.tree = tree;
     }
 
@@ -41,8 +41,8 @@ public class BinaryTreePrinter {
         StringBuilder sb = new StringBuilder();
         sb.append(root.getValue());
 
-        String pointerLeft = "└──";
-        String pointerRight = (root.getLeft() != null) ? "├──" : "└──";
+        String pointerLeft = "└── ";
+        String pointerRight = (root.getLeft() != null) ? "├── " : "└── ";
 
         traverseNodes(sb, "", pointerRight, root.getRight(), root.getLeft() != null);
         traverseNodes(sb, "", pointerLeft, root.getLeft(), false);
@@ -66,8 +66,8 @@ public class BinaryTreePrinter {
             }
 
             String paddingForBoth = paddingBuilder.toString();
-            String pointerLeft = "└──";
-            String pointerRight = (node.getLeft() != null) ? "├──" : "└──";
+            String pointerLeft = "└── ";
+            String pointerRight = (node.getLeft() != null) ? "├── " : "└── ";
 
             traverseNodes(sb, paddingForBoth, pointerRight, node.getRight(), node.getLeft() != null);
             traverseNodes(sb, paddingForBoth, pointerLeft, node.getLeft(), false);
@@ -99,7 +99,7 @@ public class BinaryTreePrinter {
 //    }
 
     public void print(PrintStream os) {
-        //os.print(leftPreorder(tree));
-        os.print(rightPreorder());
+        //os.println(leftPreorder());
+        os.println(rightPreorder());
     }
 }

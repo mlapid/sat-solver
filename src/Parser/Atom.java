@@ -1,12 +1,14 @@
 package Parser;
 
+import BinaryTreeDiagram.Node;
 import Lexer.Token;
 
-public class Atom extends AST {
+public class Atom extends Node {
 
     Token token;
 
     Atom(Token token) {
+        super(token.value);
         this.token = token;
     }
 

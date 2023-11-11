@@ -1,8 +1,10 @@
+import BinaryTreeDiagram.ChildrenExceededException;
 import Lexer.Lexer;
 import Lexer.InvalidCharacterException;
 import Parser.Parser;
 import Parser.InvalidSyntaxException;
 import Parser.AST;
+import BinaryTreeDiagram.BinaryTreePrinter;
 
 import java.util.Scanner;
 import java.io.PrintStream;
@@ -17,7 +19,7 @@ public class Solver {
         out = new PrintStream(System.out);
     }
 
-    void start() throws InvalidCharacterException, InvalidSyntaxException {
+    void start() throws InvalidCharacterException, InvalidSyntaxException, ChildrenExceededException {
 
         while (true) {
             out.print("solve> ");
@@ -30,11 +32,12 @@ public class Solver {
             Lexer lexer = new Lexer(text);
             Parser parser = new Parser(lexer);
             AST ast = parser.parse();
-            out.println("Parser returning " + ast.toString());
+            BinaryTreePrinter printTree = new BinaryTreePrinter(ast);
+            printTree.print(this.out);
         }
     }
 
-    public static void main(String[] args) throws InvalidCharacterException, InvalidSyntaxException {
+    public static void main(String[] args) throws InvalidCharacterException, InvalidSyntaxException, ChildrenExceededException {
         new Solver().start();
     }
 
