@@ -65,9 +65,15 @@ public class Lexer {
                 return new Token(TokenType.OR, "∨");
             }
 
-//            if (this.currentChar.equals('⇒') || this.currentChar.equals('→')) {
-//                return new Lexer.Lexer.Token(Lexer.Lexer.TokenType.IF, this.currentChar.toString());
-//            }
+            if (this.currentChar.equals('⟹')) {
+                this.advance();
+                return new Token(TokenType.IF, "⟹");
+            }
+
+            if (this.currentChar.equals('⟺')) {
+                this.advance();
+                return new Token(TokenType.IFF, "⟺");
+            }
 
             if (this.currentChar.equals('(')) {
                 this.advance();

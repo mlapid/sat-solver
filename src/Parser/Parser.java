@@ -56,9 +56,13 @@ public class Parser {
 
         Node node = this.literal();
 
-        while (this.currentToken.type.equals(TokenType.AND)) {
+        while (this.currentToken.type.equals(TokenType.AND) || this.currentToken.type.equals(TokenType.OR)) {
             Token token = this.currentToken;
-            this.eat(TokenType.AND);
+            if (token.type.equals(TokenType.AND)) {
+                this.eat(TokenType.AND);
+            } else {
+                this.eat(TokenType.OR);
+            }
             node = new BinaryOperator(node, token, this.literal());
         }
         return node;
@@ -73,9 +77,13 @@ public class Parser {
 
         Node node = this.clause();
 
-        while (this.currentToken.type.equals(TokenType.OR)) {
+        while (this.currentToken.type.equals(TokenType.IF) || this.currentToken.type.equals(TokenType.IFF)) {
             Token token = this.currentToken;
-            this.eat(TokenType.OR);
+            if (token.type.equals(TokenType.IF)) {
+                this.eat(TokenType.IF);
+            } else {
+                this.eat(TokenType.IFF);
+            }
             node = new BinaryOperator(node, token, this.clause());
         }
         return node;

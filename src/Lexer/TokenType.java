@@ -6,7 +6,8 @@ public enum TokenType {
     NOT,
     AND,
     OR,
-    //IF,
+    IF,
+    IFF,
     LPAREN,
     RPAREN
 }
